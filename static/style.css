@@ -736,3 +736,101 @@ select {
     }
 
 }
+
+/* IMPROVED UPDATE SECTION */
+
+.update-section {
+
+    background: linear-gradient(145deg, #f8fafc, #eef4ff);
+
+    padding: 30px;
+
+    border-radius: 22px;
+
+    border: 1px solid #dbeafe;
+
+    margin-top: 15px;
+
+}
+
+.small-header h4 {
+
+    font-size: 24px;
+
+    margin-bottom: 6px;
+
+    color: #0f172a;
+
+}
+
+.small-header p {
+
+    color: #64748b;
+
+    font-size: 14px;
+
+}
+
+.task-actions {
+
+    display: flex;
+
+    gap: 16px;
+
+    margin-top: 25px;
+
+    flex-wrap: wrap;
+
+}
+
+.update-btn {
+
+    background: linear-gradient(90deg, #10b981, #059669);
+
+}
+
+.update-btn:hover {
+
+    box-shadow: 0 10px 20px rgba(16,185,129,0.25);
+
+}
+
+.delete-btn {
+
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+
+}
+
+.delete-btn:hover {
+
+    box-shadow: 0 10px 20px rgba(239,68,68,0.25);
+
+}
+
+/* INPUT CONSISTENCY */
+
+.update-section .input-box input,
+.update-section .input-box textarea,
+.update-section .input-box select {
+
+    background: white;
+
+}
+
+/* MOBILE */
+
+@media(max-width: 768px) {
+
+    .task-actions {
+
+        flex-direction: column;
+
+    }
+
+    .task-actions button {
+
+        width: 100%;
+
+    }
+
+}
