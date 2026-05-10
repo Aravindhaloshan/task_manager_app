@@ -49,6 +49,7 @@
             <div class="form-grid">
 
                 <div class="input-box">
+
                     <label>Task Title</label>
 
                     <input
@@ -57,9 +58,11 @@
                         placeholder="Enter task title"
                         required
                     >
+
                 </div>
 
                 <div class="input-box">
+
                     <label>Priority</label>
 
                     <select name="priority">
@@ -67,6 +70,7 @@
                         <option value="Medium">⚡ Medium</option>
                         <option value="Low">🌱 Low</option>
                     </select>
+
                 </div>
 
             </div>
@@ -123,6 +127,8 @@
 
         <div class="advanced-task-card">
 
+            <!-- TASK TOP -->
+
             <div class="task-card-top">
 
                 <div>
@@ -150,6 +156,8 @@
             </div>
 
 
+            <!-- TASK META -->
+
             <div class="task-meta">
 
                 <div>
@@ -160,11 +168,20 @@
             </div>
 
 
-            <!-- UPDATE FORM -->
+            <!-- UPDATE SECTION -->
 
             <div class="update-section">
 
-                <h4>Edit Task</h4>
+                <div class="section-header small-header">
+
+                    <div>
+                        <h4>Edit Task</h4>
+                        <p>Modify task details and update progress</p>
+                    </div>
+
+                </div>
+
+                <!-- UPDATE FORM -->
 
                 <form
                     action="/update-task/{{ task.id }}"
@@ -173,58 +190,97 @@
 
                     <div class="form-grid">
 
-                        <input
-                            type="text"
-                            name="title"
-                            value="{{ task.title }}"
-                            required
-                        >
+                        <div class="input-box">
 
-                        <select name="priority">
+                            <label>Task Title</label>
 
-                            <option {% if task.priority == 'High' %}selected{% endif %}>
-                                High
-                            </option>
+                            <input
+                                type="text"
+                                name="title"
+                                value="{{ task.title }}"
+                                required
+                            >
 
-                            <option {% if task.priority == 'Medium' %}selected{% endif %}>
-                                Medium
-                            </option>
+                        </div>
 
-                            <option {% if task.priority == 'Low' %}selected{% endif %}>
-                                Low
-                            </option>
+                        <div class="input-box">
 
-                        </select>
+                            <label>Priority</label>
+
+                            <select name="priority">
+
+                                <option value="High"
+                                {% if task.priority == 'High' %}selected{% endif %}>
+                                    🔥 High
+                                </option>
+
+                                <option value="Medium"
+                                {% if task.priority == 'Medium' %}selected{% endif %}>
+                                    ⚡ Medium
+                                </option>
+
+                                <option value="Low"
+                                {% if task.priority == 'Low' %}selected{% endif %}>
+                                    🌱 Low
+                                </option>
+
+                            </select>
+
+                        </div>
 
                     </div>
 
-                    <textarea
-                        name="description"
-                    >{{ task.description }}</textarea>
+
+                    <div class="input-box">
+
+                        <label>Description</label>
+
+                        <textarea
+                            name="description"
+                            placeholder="Update task description"
+                        >{{ task.description }}</textarea>
+
+                    </div>
+
 
                     <div class="form-grid">
 
-                        <select name="status">
+                        <div class="input-box">
 
-                            <option {% if task.status == 'Pending' %}selected{% endif %}>
-                                Pending
-                            </option>
+                            <label>Status</label>
 
-                            <option {% if task.status == 'Completed' %}selected{% endif %}>
-                                Completed
-                            </option>
+                            <select name="status">
 
-                        </select>
+                                <option value="Pending"
+                                {% if task.status == 'Pending' %}selected{% endif %}>
+                                    ⏳ Pending
+                                </option>
+
+                                <option value="Completed"
+                                {% if task.status == 'Completed' %}selected{% endif %}>
+                                    ✅ Completed
+                                </option>
+
+                            </select>
+
+                        </div>
 
                     </div>
 
+
                     <div class="task-actions">
 
-                        <button type="submit" class="update-btn">
-                            Update Task
+                        <button
+                            type="submit"
+                            class="modern-btn update-btn"
+                        >
+                            ✏️ Update Task
                         </button>
 
                 </form>
+
+
+                        <!-- DELETE FORM -->
 
                         <form
                             action="/delete-task/{{ task.id }}"
@@ -233,9 +289,9 @@
 
                             <button
                                 type="submit"
-                                class="delete-btn"
+                                class="modern-btn delete-btn"
                             >
-                                Delete
+                                🗑 Delete Task
                             </button>
 
                         </form>
@@ -247,6 +303,8 @@
         </div>
 
         {% else %}
+
+        <!-- EMPTY STATE -->
 
         <div class="empty-state advanced-empty">
 
