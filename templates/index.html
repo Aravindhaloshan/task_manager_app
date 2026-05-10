@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <!-- ANALYTICS -->
+
+    <div class="analytics-grid">
+
+        <div class="card total-card">
+            <h3>Total Tasks</h3>
+            <p>{{ analytics.total_tasks }}</p>
+        </div>
+
+        <div class="card completed-card">
+            <h3>Completed</h3>
+            <p>{{ analytics.completed_tasks }}</p>
+        </div>
+
+        <div class="card pending-card">
+            <h3>Pending</h3>
+            <p>{{ analytics.pending_tasks }}</p>
+        </div>
+
+        <div class="card progress-card">
+            <h3>Completion %</h3>
+            <p>{{ analytics.completion_percentage }}%</p>
+        </div>
+
+    </div>
+
+
+    <!-- ADD TASK -->
+
+    <div class="advanced-task-form">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Add New Task</h2>
+                <p>Create and organize your tasks efficiently</p>
+            </div>
+
+        </div>
+
+        <form action="/add-task" method="POST">
+
+            <div class="form-grid">
+
+                <div class="input-box">
+                    <label>Task Title</label>
+
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="Enter task title"
+                        required
+                    >
+                </div>
+
+                <div class="input-box">
+                    <label>Priority</label>
+
+                    <select name="priority">
+                        <option value="High">🔥 High</option>
+                        <option value="Medium">⚡ Medium</option>
+                        <option value="Low">🌱 Low</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="input-box">
+
+                <label>Description</label>
+
+                <textarea
+                    name="description"
+                    placeholder="Enter task description"
+                ></textarea>
+
+            </div>
+
+            <div class="form-grid">
+
+                <div class="input-box">
+
+                    <label>Status</label>
+
+                    <select name="status">
+                        <option value="Pending">⏳ Pending</option>
+                        <option value="Completed">✅ Completed</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <button type="submit" class="modern-btn">
+                + Add Task
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- TASKS SECTION -->
+
+    <div class="tasks-wrapper">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Your Tasks</h2>
+                <p>Manage and update your daily workflow</p>
+            </div>
+
+        </div>
+
+        {% for task in tasks %}
+
+        <div class="advanced-task-card">
+
+            <div class="task-card-top">
+
+                <div>
+
+                    <h3>{{ task.title }}</h3>
+
+                    <p class="task-description">
+                        {{ task.description }}
+                    </p>
+
+                </div>
+
+                <div class="task-badges">
+
+                    <span class="priority-badge {{ task.priority|lower }}">
+                        {{ task.priority }}
+                    </span>
+
+                    <span class="status-badge {{ task.status|lower }}">
+                        {{ task.status }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="task-meta">
+
+                <div>
+                    📅 Created:
+                    {{ task.created_date.strftime('%d-%m-%Y') }}
+                </div>
+
+            </div>
+
+
+            <!-- UPDATE FORM -->
+
+            <div class="update-section">
+
+                <h4>Edit Task</h4>
+
+                <form
+                    action="/update-task/{{ task.id }}"
+                    method="POST"
+                >
+
+                    <div class="form-grid">
+
+                        <input
+                            type="text"
+                            name="title"
+                            value="{{ task.title }}"
+                            required
+                        >
+
+                        <select name="priority">
+
+                            <option {% if task.priority == 'High' %}selected{% endif %}>
+                                High
+                            </option>
+
+                            <option {% if task.priority == 'Medium' %}selected{% endif %}>
+                                Medium
+                            </option>
+
+                            <option {% if task.priority == 'Low' %}selected{% endif %}>
+                                Low
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <textarea
+                        name="description"
+                    >{{ task.description }}</textarea>
+
+                    <div class="form-grid">
+
+                        <select name="status">
+
+                            <option {% if task.status == 'Pending' %}selected{% endif %}>
+                                Pending
+                            </option>
+
+                            <option {% if task.status == 'Completed' %}selected{% endif %}>
+                                Completed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="task-actions">
+
+                        <button type="submit" class="update-btn">
+                            Update Task
+                        </button>
+
+                </form>
+
+                        <form
+                            action="/delete-task/{{ task.id }}"
+                            method="POST"
+                        >
+
+                            <button
+                                type="submit"
+                                class="delete-btn"
+                            >
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </div>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state advanced-empty">
+
+            <div class="empty-icon">
+                📋
+            </div>
+
+            <h3>No Tasks Yet</h3>
+
+            <p>
+                Start by creating your first task and stay productive.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

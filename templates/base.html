@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Task Manager</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+
+</head>
+<body>
+
+<div class="navbar">
+
+    <div class="logo-section">
+        <h2>Smart Task Manager</h2>
+    </div>
+
+    {% if current_user.is_authenticated %}
+
+    <div class="nav-right">
+        <span class="welcome-text">
+            Welcome, {{ current_user.username }}
+        </span>
+
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+
+    {% endif %}
+
+</div>
+
+<div class="container">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+
+</div>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>

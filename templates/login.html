@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="auth-page">
+
+    <div class="auth-left">
+
+        <div class="brand-content">
+
+            <h1>Smart Task Manager</h1>
+
+            <p>
+                Organize tasks, track progress, and manage your productivity
+                with real-time updates and smart analytics.
+            </p>
+
+            <div class="feature-list">
+
+                <div class="feature-item">
+                    ✅ Real-time Task Updates
+                </div>
+
+                <div class="feature-item">
+                    ✅ Smart Analytics Dashboard
+                </div>
+
+                <div class="feature-item">
+                    ✅ Secure Authentication
+                </div>
+
+                <div class="feature-item">
+                    ✅ PostgreSQL Database
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="auth-right">
+
+        <div class="modern-auth-card">
+
+            <div class="auth-header">
+
+                <h2>Welcome Back 👋</h2>
+
+                <p>Login to continue managing your tasks</p>
+
+            </div>
+
+            <form method="POST">
+
+                <div class="input-group">
+
+                    <label>Username</label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Enter your username"
+                        required
+                    >
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Password</label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    Login
+                </button>
+
+            </form>
+
+            <div class="auth-footer">
+
+                <p>
+                    Don't have an account?
+                    <a href="/register">Create Account</a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
